@@ -1,0 +1,20 @@
+name: "FAP Build"
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  ufbt-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build FAP
+        uses: flipperdevices/fbt-action@v1
+        with:
+          sdk-channel: release
+
+      - name: Upload FAP
+        uses: actions/upload-artifact@v4
+        with:
+          name: fap-build
+          path: 'dist/*.fap'
