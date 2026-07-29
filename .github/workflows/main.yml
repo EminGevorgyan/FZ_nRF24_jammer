@@ -8,10 +8,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build FAP
-        uses: flipperdevices/ufbt-action@v1
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          sdk-channel: release
+          python-version: '3.11'
+
+      - name: Install ufbt & Build
+        run: |
+          pip install ufbt
+          ufbt update
+          ufbt
 
       - name: Upload FAP
         uses: actions/upload-artifact@v4
